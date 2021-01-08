@@ -1,6 +1,7 @@
 # Specify a base image
-FROM mhart/node:alpine
+FROM node:alpine
 
+WORKDIR /usr/app
 
 # Install some depenendencies
 COPY ./ ./
