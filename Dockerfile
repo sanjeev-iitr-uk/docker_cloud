@@ -1,5 +1,6 @@
 # Specify a base image
-FROM node:alpine
+FROM mhart/node:alpine
+
 
 # Install some depenendencies
 COPY ./ ./
