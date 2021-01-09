@@ -1,11 +1,19 @@
 sudo: required
 language: generic
-
 services:
   - docker
-
 before_install:
   - docker build -t sanjeevdotextrabox/docker_cloud -f Dockerfile.dev .
-
 script:
   - docker run -e CI=true sanjeevdotextrabox/docker_cloud  npm run test
+deploy:
+  provider: elasticbeanstalk
+  region: 'ap-south-1'
+  app: 'docker_cloud'
+  env: 'DockerCloud-env'
+  bucket_name: 'elasticbeanstalk-ap-south-1-000708646995'
+  bucket_path: 'docker_cloud'
+  on:
+    branch: master
+  access_key_id: $AWS_ACCESS_KEY
+  secret_access_key: $AWS_SECRET_KEY
