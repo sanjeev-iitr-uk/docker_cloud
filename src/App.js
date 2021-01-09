@@ -7,7 +7,7 @@ function App() {
     <div className="App">
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
-        <p>Hi Dcoker Cloud Setup</p>
+        <p>Hi Dcoker Cloud Setup Complete</p>
       </header>
     </div>
   );
