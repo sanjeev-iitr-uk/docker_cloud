@@ -11,14 +11,26 @@ script:
   - docker run -e CI=true sanjeevdotextrabox/react-test npm test
 
 after_success:
-  - docker build -t sanjeevdotextrabox/multi-client ./client
-  - docker build -t sanjeevdotextrabox/multi-nginx ./nginx
-  - docker build -t sanjeevdotextrabox/multi-server ./server
-  - docker build -t sanjeevdotextrabox/multi-worker ./worker
+  - docker build -t sanjeevdotextrabox/multi-client-10-14 ./client
+  - docker build -t sanjeevdotextrabox/multi-nginx-10-14 ./nginx
+  - docker build -t sanjeevdotextrabox/multi-server-10-14 ./server
+  - docker build -t sanjeevdotextrabox/multi-worker-10-14 ./worker
   # Log in to the docker CLI
   - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
   # Take those images and push them to docker hub
-  - docker push sanjeevdotextrabox/multi-client
-  - docker push sanjeevdotextrabox/multi-nginx
-  - docker push sanjeevdotextrabox/multi-server
-  - docker push sanjeevdotextrabox/multi-worker
+  - docker push sanjeevdotextrabox/multi-client-10-14
+  - docker push sanjeevdotextrabox/multi-nginx-10-14
+  - docker push sanjeevdotextrabox/multi-server-10-14
+  - docker push sanjeevdotextrabox/multi-worker-10-14
+
+deploy:
+  provider: elasticbeanstalk
+  region: 'ap-south-1'
+  app: 'multicontainer_docker'
+  env: 'MulticontainerDocker-env'
+  bucket_name: 'elasticbeanstalk-ap-south-1-000708646995'
+  bucket_path: 'multicontainer_docker'
+  on:
+    branch: master
+  access_key_id: $AWS_ACCESS_KEY
+  secret_access_key: $AWS_SECRET_KEY
