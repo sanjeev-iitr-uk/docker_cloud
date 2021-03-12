@@ -1,4 +1,4 @@
-// L5
+// L5 - React App (dev+prod+volumes)
 // In this branch we will discuss a production flow of application using docker and travis CI and github
 // we will also learn about volumes in this branch. volumes hepls in development mode
 // for prod build we generate build and serve it suing nginx (we will use two images 1st app image 2nd nginx image
