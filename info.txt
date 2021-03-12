@@ -1,1 +1,37 @@
 // L1
+// Basic Commands
+
+1- docker run <imageName> <Default Command>
+
+Ex - docker run busybox ls 
+so this command will use busybox image <download from docker server> and create a container out of that.
+now it will start this container and run ls command inside that conatiner.
+
+so basically run command is nothing but create + start 
+Ex- docker create <imageName>
+this command will create a container out of this image 
+Ex - docker start  -a <containerId>
+-a flag is for attach your terminal for output
+
+2- docker ps
+this command will list out all running containers
+
+3- docker ps --all 
+this command will list out all  stopped  containers
+
+4- docker system prune
+this command will delete all stoped containers and their resources
+
+5- docker log <containerId>
+this will log data of exited container
+
+6- docker stop <containerId>
+this command will stop the container gracefully (remove attached resources also so it will take few seconds to complate)
+
+7- docker kill <containerId> 
+this command will kill the container immidiately (don't care about deattaching resources)
+
+8- docker exec -it <containerId> <default Command>
+using this command you can enter in runing container. -i flag will allow to interact from your local terminal to 
+process runing inside your container. and -t flag allows you to output well formated messages.
+
