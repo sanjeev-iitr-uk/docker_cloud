@@ -4,7 +4,14 @@
 1- use this command to build 
 docker build .
 2- use this command to run and port forwarding 
-docker run -p 3000:3000 <containerId>
+docker run -p 3000:3000 <imageId generated in last step>
+
+
+Note - Use these steps to connect with docker playground to your terminal
+
+1 - Run ssh-keygen and fill out name of file and empty passphrase.
+2 - Run ssh -i <File name entered in first step> <docker ssh address>. 
+    Example: ssh -i ida_rsa ip172-18-0-9-bfe8s7iv9dig00cuhdsg@direct.labs.play-with-docker.com
 
 
 
