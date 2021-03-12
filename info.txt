@@ -28,7 +28,11 @@ use this command to build and run all the services written in docker-compose fil
 3- docker-compose down 
 use this command to stop all service(container)
 
+4- docker-compose up -d 
+-d flag is used to run services in background same like docker run -d <container id>
 
+5- docker_compose ps 
+use this command to get all runing containers
 
 
 
