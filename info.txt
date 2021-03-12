@@ -1,38 +1,60 @@
-// L3
-// A  Simple App to show use of docker-compose
-
-// docker build -t username/projectname:<version> . (use this command to build tag image)
-
-docker-compose is a cli tool same like docker cli. but docker-compose allows us write configurations and commands in files
-or say it allows us to automate commands, so you can avoid typing repetative commands in docker cli.
-aslo docker-compose allows us to wrtite multiple services(container) configuration in a single file and and these services
-can connect with each other without any extra configuration.
+// L5
+// In this branch we will discuss a production flow of application using docker and travis CI and github
+// we will also learn about volumes in this branch. volumes hepls in development mode
+// for prod build we generate build and serve it suing nginx (we will use two images 1st app image 2nd nginx image
+in one Dockerfile for prod)
 
 
-
-in this branch we are creating two services (containers)
-1- NodeApp
-2- Redis server
-
-NodeApp will stores number of visites on app. everytime it will increase counter in redis. thats all.
+1- we will use a react app generated from created-react-app
+2- we will create two docker files 
+A- Dockerfile.dev (for development & testing on travis CI)
+B- Dockerfile (for production build)
 
 
-docker-compose commands
+to use Dockerfile.dev file use - docker build -f Dockerfile.dev .
 
-1- docker-compose up 
-use this command to run all the containers (services) inside docker-compose file
+Volumes
+-------
 
-2- docker-compose up --build
-use this command to build and run all the services written in docker-compose file
+in development mode, after one build if change any thing in code you need to  build your image again - in this process 
+your code+ node_modules will be copied again and then only your change will reflect.
 
-3- docker-compose down 
-use this command to stop all service(container)
+to avoid this we can use Volumes in development mode
+volumes allows us to setup reference between container and local files. this way there is no need to build 
+after every change.
 
-4- docker-compose up -d 
--d flag is used to run services in background same like docker run -d <container id>
+volume docker cli command
+docker run -p 3000:3000 -v /app/node_modules -v $(pwd): /app <imageId>
+this command says use node_modules of your own and else use everything from reference
 
-5- docker_compose ps 
-use this command to get all runing containers
+
+now we can automate this log command in a file using docker-compose, use this Dockerfile.dev in that docker-compose 
+configuration file
+
+now we can run our test. there could be multiple ways to run tests
+A- build image and then run image with npm run test command (do not forget -it flag)
+B- use exec command to enter in runing container and use npm run test
+docker exec -it <containerId> npm run test
+C- write one more service "test" in docker-compose file. and overwrite the default command(default written in Dockerfile.dev)
+use npm run test command 
+
+
+
+Production Enviornment
+-----------------------
+
+to run our app in prod we have 1st build our code the serve it using nginx
+to build an image we have to create Dockerfile for prod
+
+to run the prod version
+docker build .
+docker run -p 8080:80 <imageid>
+
+
+
+
+
+
 
 
 
