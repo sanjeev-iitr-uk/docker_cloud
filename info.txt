@@ -1,17 +1,35 @@
 // L3
-// A Simple Node Server Image Using Dockerfile
+// A  Simple App to show use of docker-compose
 
-1- use this command to build 
-docker build .
-2- use this command to run and port forwarding 
-docker run -p 3000:3000 <imageId generated in last step>
+// docker build -t username/projectname:<version> . (use this command to build tag image)
+
+docker-compose is a cli tool same like docker cli. but docker-compose allows us write configurations and commands in files
+or say it allows us to automate commands, so you can avoid typing repetative commands in docker cli.
+aslo docker-compose allows us to wrtite multiple services(container) configuration in a single file and and these services
+can connect with each other without any extra configuration.
 
 
-Note - Use these steps to connect with docker playground to your terminal
 
-1 - Run ssh-keygen and fill out name of file and empty passphrase.
-2 - Run ssh -i <File name entered in first step> <docker ssh address>. 
-    Example: ssh -i ida_rsa ip172-18-0-9-bfe8s7iv9dig00cuhdsg@direct.labs.play-with-docker.com
+in this branch we are creating two services (containers)
+1- NodeApp
+2- Redis server
+
+NodeApp will stores number of visites on app. everytime it will increase counter in redis. thats all.
+
+
+docker-compose commands
+
+1- docker-compose up 
+use this command to run all the containers (services) inside docker-compose file
+
+2- docker-compose up --build
+use this command to build and run all the services written in docker-compose file
+
+3- docker-compose down 
+use this command to stop all service(container)
+
+
+
 
 
 
