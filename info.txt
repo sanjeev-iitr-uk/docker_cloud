@@ -4,20 +4,7 @@
 Summary
 --------
 
-In prod version we will create prod images using Dockerfile for each of the conatiner - client,server,nginx,worker.
-the only catch is in dev version of client container we were runing dev server but for prod we will serve the build version for that we will will use another nginx for client
 
-
-Architecture
--------------
-
-In this branch, we will write .travis.yml that contain the following steps
-1- run a docker
-2- create imagage of client using Dockerfile.dev
-3- perform test
-
-4- generate prod images
-5- push images to docker hub
 
 
 
