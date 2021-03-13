@@ -1,54 +1,18 @@
-// L5 - React App (dev+prod+volumes)
-// In this branch we will discuss a production flow of application using docker and travis CI and github
-// we will also learn about volumes in this branch. volumes hepls in development mode
-// for prod build we generate build and serve it suing nginx (we will use two images 1st app image 2nd nginx image
-in one Dockerfile for prod)
+// L6 - How to use github -> Travis CI -> AWS Elastic Beanstalk
 
-
-1- we will use a react app generated from created-react-app
-2- we will create two docker files 
-A- Dockerfile.dev (for development & testing on travis CI)
-B- Dockerfile (for production build)
-
-
-to use Dockerfile.dev file use - docker build -f Dockerfile.dev .
-
-Volumes
--------
-
-in development mode, after one build if change any thing in code you need to  build your image again - in this process 
-your code+ node_modules will be copied again and then only your change will reflect.
-
-to avoid this we can use Volumes in development mode
-volumes allows us to setup reference between container and local files. this way there is no need to build 
-after every change.
-
-volume docker cli command
-docker run -p 3000:3000 -v /app/node_modules -v $(pwd): /app <imageId>
-this command says use node_modules of your own and else use everything from reference
-
-
-now we can automate this log command in a file using docker-compose, use this Dockerfile.dev in that docker-compose 
-configuration file
-
-now we can run our test. there could be multiple ways to run tests
-A- build image and then run image with npm run test command (do not forget -it flag)
-B- use exec command to enter in runing container and use npm run test
-docker exec -it <containerId> npm run test
-C- write one more service "test" in docker-compose file. and overwrite the default command(default written in Dockerfile.dev)
-use npm run test command 
+Travis Config (.travis.yml)
+------------
+1- Tell travis that you have a Dockerfile and you want to make and image out of that so give you a Dockerfile
+2- Build your image using Dockerfile.dev(to run test)
+3- Tell travis how to run your test suit
+4- Tell travis how to deploy your code to AWS
+(this will need a elastic beanstalk app credentials)
 
 
 
-Production Enviornment
------------------------
 
-to run our app in prod we have 1st build our code the serve it using nginx
-to build an image we have to create Dockerfile for prod
 
-to run the prod version
-docker build .
-docker run -p 8080:80 <imageid>
+
 
 
 
