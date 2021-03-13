@@ -1,5 +1,16 @@
 // L6 - How to use github -> Travis CI -> AWS Elastic Beanstalk
 
+
+Summary
+--------
+
+in this branch we will create a react app using create-react-app. then we will perform these steps
+1- create a travis.yml
+2- this travis.yml will first create an image using Dockerfile.dev and then run this image with command npm run test
+3- after sucessful test, it will deploy the whole code on elastic beanstalk
+4- now elastic beanstalk will read Dockerfile and build an image
+5- 
+
 Travis Config (.travis.yml)
 ------------
 1- Tell travis that you have a Dockerfile and you want to make and image out of that so give you a Dockerfile
