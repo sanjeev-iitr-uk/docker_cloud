@@ -1,56 +1,25 @@
-// L6 - A Multicontainer App
+// L6 - A Multicontainer App Prod Version
 
 
 Summary
 --------
 
-This app has 4 main components 
-1- client (react app)
-2- server (express +redis+ pg)
-3- worker (this will calculate fibnocai and poll redis for any value)
-4- nginx
-
-so the idea is user will put some value from react app (frontend) then post it to server to cal fib number. now server 
-will store this val in pg and insert in redis. now worker will detect insert event and calculate fib number store it 
-in redis.
-
-when user visits frontend frontend will fetch all values(history) from pg and redis and show it on frontend.
+In prod version we will create prod images using Dockerfile for each of the conatiner - client,server,nginx,worker.
+the only catch is in dev version of client container we were runing dev server but for prod we will serve the build version for that we will will use another nginx for client
 
 
 Architecture
-------------
+-------------
 
-There will be following images
+In this branch, we will write .travis.yml that contain the following steps
+1- run a docker
+2- create imagage of client using Dockerfile.dev
+3- perform test
 
-1- nginx 
-all request from frontend will come here
-if it is a /api request it would be forwarded to express server container otherwise it would be forwarded to client
-app (react) container
-this proxy config will be written in default.config
-
-2- server
-this is express server contains all the routes and handlers
-
-3- postgres
-to save all indexes till now
-4- redis
-to save calculated values till now
-5- worker
-this worker will poll redis and when some values will be inserted in redis this worker will calculate fib
-and push back to redis again that will be fetched on frontend
-
-6- client
-this react frontend
+4- generate prod images
+5- push images to docker hub
 
 
-each container has their own Dockerfile.dev
-
-docker-compose
----------------
-this file is needed to write all services(containers) at one place and automate the commands
-
-to run the full bundle just user
-docker-compose up --build
 
 
 
