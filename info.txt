@@ -4,6 +4,39 @@
 Summary
 --------
 
+In this branch we will discuss about why we use kubernetes and its architecture. we will also deploy multiclient app in docker pod.
+
+
+1- Why we use kubernetes
+
+kubernetes allows us a platform to manage multiple containers and scale when needed. its a container archectration
+
+
+2- Architecture
+
+in this branch we will use 2 tools kubernetes 
+A- minikube - this tool is use for creating a kubernetes clust in local computer
+B- kubectl - this tool allows us to manage kubernetes cluster 
+
+so, kubernetes is cluster of nodes(vm). each can have multiple pods and each pod can have multiple containers runing inside. generally a pod contain dependent or tightly coupled containers.  apart from nodes each cluster has a master node, this node manages all the nodes(this master takes decision which pod is runing on which node). 
+
+Object - in kubernetes we create objects (pod, service, etc) using configuration files.
+------
+a file of type pod is used to create pod inside node via master node
+commands 
+
+kubectl apply -f mypod.yml
+this command launch a pod with container image written inside this file
+kubectl get pods
+list out all runing pods
+kubectl get services
+list out all services runing 
+
+
+services
+-------
+services files are used to setup networking between pods
+
 
 
 
