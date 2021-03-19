@@ -1,48 +1,44 @@
-// L6 - A Multicontainer App Prod Version
+// L11 - deployment objects
 
 
 Summary
 --------
 
-In this branch we will discuss about why we use kubernetes and its architecture. we will also deploy multiclient app in docker pod.
+if you want to update the image in existing pod object. we can just update the image in object file use command to feed it to cluster via master node
+
+kubectl apply -f <your_updated file name>
+master will identify if there is already any object of type pod and with same label is runing inside cluster.
+it will update that pos, otherwise it will create a new pod
+
+using the above way to update objects has limited functionality like it can only update images no other changes in
+file are allowed. so for that there is other file type called deployments. we can use deployments for both prod and dev. 
+
+Some New Commands
+-------------------
+
+1- to delete a pod
+kubectl delete -f <pod file>
+2- to get detail info of a pod
+kubectl describe 
+3- to apply a deployment file
+kubectl apply -f  <deployment file>
+4- get runing deployment
+kubectl get deployments
+5- get cluster ip to run from browser
+minikube ip
+6- get full details of a pod
+kubectl describe pods <runing pod name>
 
 
-1- Why we use kubernetes
-
-kubernetes allows us a platform to manage multiple containers and scale when needed. its a container archectration
-
-
-2- Architecture
-
-in this branch we will use 2 tools kubernetes 
-A- minikube - this tool is use for creating a kubernetes clust in local computer
-B- kubectl - this tool allows us to manage kubernetes cluster 
-
-so, kubernetes is cluster of nodes(vm). each can have multiple pods and each pod can have multiple containers runing inside. generally a pod contain dependent or tightly coupled containers.  apart from nodes each cluster has a master node, this node manages all the nodes(this master takes decision which pod is runing on which node). 
-
-Object - in kubernetes we create objects (pod, service, etc) using configuration files.
-------
-a file of type pod is used to create pod inside node via master node
-commands 
-
-kubectl apply -f mypod.yml
-this command launch a pod with container image written inside this file
-kubectl get pods
-list out all runing pods
-kubectl get services
-list out all services runing 
-
-
-services
--------
-services files are used to setup networking between pods
-
-
-
-
-
-
-
+Command to use latest version of the container image
+-----------------------------------------------------
+first upload your image with a version tag then use this command
+before using set command first feed the file
+kubectl apply -f <deployment file name>
+then use this template for set comand
+kubectl set image <object type> / <object name> <container name> = <new image tag>
+example - 
+kubectl set image deployment/client-deployment client=stephengrider/multi-client:v5
 
 
 
